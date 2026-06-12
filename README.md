@@ -12,13 +12,13 @@ This repo documents my progression learning backend development with Node.js. Th
 ### 02. restaurant_web_server
 
 - Built a Fastify web server, learning how Node’s event loop handles asynchronous requests and avoids blocking.
-- Configured routes to serve dynamic content and organized your project using separate data modules.
-- Implemented server-side rendering with EJS and improved the visual design of web pages using static assets.
-- Integrated key Fastify plug-ins to enhance functionality and streamline your application.
+- Configured routes to serve dynamic content and organized my project using separate data modules.
+- Implemented server-side rendering with EJS and learned how to use static assets.
+- Integrated key Fastify plug-ins to enhance functionality and streamline my application.
 
 ### 03. password_manager
 
-- Built my own password manager application
-- Implemented secure password hashing logic utilizing the bcrypt package
-- Set up a MongoDB database collection for passwords
-- Configured Node to use the mongodb package with user input
+- Built my own password manager application.
+- Implemented secure password hashing logic utilizing the bcrypt package.
+- Set up a MongoDB database collection for passwords.
+- Configured Node to use the mongodb package with user input.
