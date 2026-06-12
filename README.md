@@ -1,6 +1,6 @@
 # Purpose
 
-This repo documents my progression learning backend development with Node.js. The projects are based on exercises and applications from a Node.js textbook, which I have implemented, expanded upon, and commented to reinforce my understanding of the concepts being taught.
+This repo documents my progression learning backend development with Node.js. The projects are based on exercises and applications from a Node.js textbook (Node.js Projects by Jonathan Wexler), which I have implemented, expanded upon, and commented to reinforce my understanding of the concepts being taught.
 
 ## Projects
 
