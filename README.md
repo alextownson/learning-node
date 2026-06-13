@@ -22,3 +22,5 @@ This repo documents my progression learning backend development with Node.js. Th
 - Implemented secure password hashing logic utilizing the bcrypt package.
 - Set up a MongoDB database collection for passwords.
 - Configured Node to use the mongodb package with user input.
+
+### 04. rss_app
