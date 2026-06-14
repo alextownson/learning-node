@@ -1,8 +1,16 @@
+// library for turning rss xml feeds into JavaScript objects
+import Parser from 'rss-parser';
+
+const parser = new Parser();
+
 const main = async () => {
   const url = 'https://www.bonappetit.com/feed/recipes-rss-feed/rss';
-  // make a get request with the url
-  const response = await fetch(url);
-  // test reads the response body as a string
-  console.log(await response.text());
+  // fetches and parses from the url, and destructure the response object
+  const { title, items } = await parser.parseURL(url);
+  // feed title
+  console.log(title);
+  // title and link of each item
+  const results = items.map(({ title, link }) => ({ title, link }));
+  console.table(results);
 };
 main();
