@@ -11,6 +11,11 @@ const main = async () => {
   console.log(title);
   // title and link of each item
   const results = items.map(({ title, link }) => ({ title, link }));
+  console.clear();
   console.table(results);
+  // tracks periodic updates
+  const today = Temporal.Now.zonedDateTimeISO('America/Toronto');
+  console.log('Last updated', today.toString());
 };
-main();
+// fetches updates periodically
+setInterval(main, 2000);
