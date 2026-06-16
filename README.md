@@ -24,3 +24,9 @@ This repo documents my progression learning backend development with Node.js. Th
 - Configured Node to use the mongodb package with user input.
 
 ### 04. rss_app
+
+- Built an RSS feed aggregator using Node and rss-parser
+- Retrieved and parsed feed date from external sources using API calls
+- Added support for custom user-submitted items via the command line
+- Displayed aggregated content in a readable table format
+- Enhanced my aggregator with features like keyword filtering and publish-time tracking
