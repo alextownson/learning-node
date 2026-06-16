@@ -1,0 +1,12 @@
+{
+  "name": "05_library_api",
+  "version": "1.0.0",
+  "description": "a RESTful library API",
+  "license": "ISC",
+  "author": "Alex Townson",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
