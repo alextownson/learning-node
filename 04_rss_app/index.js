@@ -6,6 +6,7 @@ const parser = new Parser();
 // sigint: true allows you to kill the script with ctrl+c
 const prompt = promptModule({ sigint: true });
 const customItems = [];
+const filterKeyword = prompt('Filter feed items by keyword: ');
 
 const main = async () => {
   //fetch from multiple sources - use some different sources than textbook because the ones given are no longer active
@@ -34,9 +35,13 @@ const aggregate = (responses, feedItems) => {
     // get the title and link of the item
     for (let { title, link } of items) {
       //filter those - only ones with titles including 'salad'
-      if (title.toLowerCase().includes('salad')) {
-        // add those into the feedItems array
+      if (!filterKeyword) {
         feedItems.push({ title, link });
+      } else {
+        if (title.toLowerCase().includes(filterKeyword.trim().toLowerCase())) {
+          // add those into the feedItems array
+          feedItems.push({ title, link });
+        }
       }
     }
   }
