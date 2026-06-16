@@ -1,7 +1,11 @@
 // library for turning rss xml feeds into JavaScript objects
 import Parser from 'rss-parser';
+import promptModule from 'prompt-sync';
 
 const parser = new Parser();
+// sigint: true allows you to kill the script with ctrl+c
+const prompt = promptModule({ sigint: true });
+const customItems = [];
 
 const main = async () => {
   //fetch from multiple sources - use some different sources than textbook because the ones given are no longer active
@@ -20,7 +24,8 @@ const main = async () => {
   // clears the console, prints the feed, tracks update time
   print(feedItems);
 };
-// fetches updates periodically - change to a longer time to avoid 409 code (rate limiting)
+// calls once then calls periodically - change to a longer time to avoid 409 code (rate limiting)
+main();
 setInterval(main, 60_000);
 
 const aggregate = (responses, feedItems) => {
@@ -39,8 +44,15 @@ const aggregate = (responses, feedItems) => {
 };
 
 const print = (feedItems) => {
+  // prompt user to add a new feed item title and link
+  const res = prompt('Add item: ');
+  // split the input string to destructure a title and link
+  const [title, link] = res.split(',');
+  // as long as they're not undefined, add them to the customItems array
+  if (![title, link].includes(undefined)) customItems.push({ title, link });
   console.clear();
-  console.table(feedItems);
+  // print feed and custom items to the console
+  console.table(feedItems.concat(customItems));
   // tracks periodic updates
   const today = Temporal.Now.zonedDateTimeISO('America/Toronto');
   console.log('Last updated', today.toString());
