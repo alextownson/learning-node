@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 // fastify plugin that enables URL-encoded form parsing
 import formbody from '@fastify/formbody';
+import routes from './routes/index.js';
 
 // instantiate fastify
 const app = Fastify();
@@ -20,6 +21,8 @@ app.setNotFoundHandler((request, reply) => {
   const { message, statusCode } = request.error || {};
   reply.status(statusCode || 500).send({ message });
 });
+
+app.register(routes, { prefix: '/api' });
 
 // start listening for requests
 try {
