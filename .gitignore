@@ -1,2 +1,3 @@
 **/.DS_Store
 node_modules/
+05_library_api/db/database.sqlite
