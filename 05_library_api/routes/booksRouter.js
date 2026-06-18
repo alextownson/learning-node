@@ -56,9 +56,20 @@ async function booksRouter(fastify, _opts) {
   fastify.post('/', async (request, reply) => {
     const { title, author } = request.body;
     try {
-      // runs a query to create a new Book record with a title and author field
-      const book = await Book.create({ title, author });
-      reply.send(book);
+      // looks for an existing book by the title
+      const book = await Book.findOne({ where: { title } });
+      // if the book exists, increment the count and save it
+      if (book) {
+        book.count += 1;
+        await book.save();
+        reply.send(book);
+      } else {
+        // if the book doesn't exist, run a query to create a new Book record with a title and author field
+        // initialize count to 1
+        console.log(`The book doesn't exist`);
+        const newBook = await Book.create({ title, author, count: 1 });
+        reply.send(newBook);
+      }
     } catch (e) {
       console.error('Error occurred:', e);
       reply.send(e);
