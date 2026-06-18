@@ -18,6 +18,17 @@ async function booksRouter(fastify, _opts) {
     }
   });
 
+  // GET route to list all of the books in the database
+  fastify.get('/', async (request, reply) => {
+    try {
+      const books = await Book.findAll();
+      reply.send(books);
+    } catch (e) {
+      console.error('Error occurred:', e);
+      reply.send(e);
+    }
+  });
+
   // register a PUT route
   fastify.put('/:id', async (request, reply) => {
     const { id } = request.params;
