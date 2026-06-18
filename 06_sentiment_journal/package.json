@@ -1,0 +1,12 @@
+{
+  "name": "06_sentiment_journal",
+  "version": "1.0.0",
+  "description": "natural language processor sentiment analysis",
+  "license": "ISC",
+  "author": "Alex Townson",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

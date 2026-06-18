@@ -36,3 +36,5 @@ This repo documents my progression learning backend development with Node.js. Th
 - Designed and organized custom RESTful APIs
 - Built an API that connects to any SQL database using Sequelize
 - Extended my API with new endpoints and resource models
+
+### 06. sentiment_journal
