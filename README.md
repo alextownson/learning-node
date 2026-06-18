@@ -32,3 +32,7 @@ This repo documents my progression learning backend development with Node.js. Th
 - Enhanced my aggregator with features like keyword filtering and publish-time tracking
 
 ### 05. library_api
+
+- Designed and organized custom RESTful APIs
+- Built an API that connects to any SQL database using Sequelize
+- Extended my API with new endpoints and resource models
