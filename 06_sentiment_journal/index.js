@@ -41,26 +41,34 @@ const tokenizeInput = (inputString) => {
   return tokenizer.tokenize(inputString);
 };
 
-// stemming -> a fast, rule-based text preprocessing technique that reduces inflected or derived words to their root or base form by stripping away suffixes and prefixes
-const stemWords = (tokens) => {
-  const stems = [];
-  // loop through each token
-  for (let token of tokens) {
-    // break each word down to it's stem
-    const stem = natural.PorterStemmer.stem(token);
-    // add the stems to the stems array
-    stems.push(stem);
-  }
-  return stems;
-};
+// // stemming -> a fast, rule-based text preprocessing technique that reduces inflected or derived words to their root or base form by stripping away suffixes and prefixes
+// const stemWords = (tokens) => {
+//   const stems = [];
+//   // loop through each token
+//   for (let token of tokens) {
+//     // break each word down to it's stem
+//     const stem = natural.PorterStemmer.stem(token);
+//     // add the stems to the stems array
+//     stems.push(stem);
+//   }
+//   return stems;
+// };
 
 // correct spelling
 const correctedSpelling = correctSpelling(inputString);
 // pass the corrected spelling string to the tokenizer
 const tokens = tokenizeInput(correctedSpelling);
-// pass the tokens to the stemming function
-const stems = stemWords(tokens);
-// pass the stems to the remove stop words function
-const removedStopWords = removeStopwords(stems);
+// // pass the tokens to the stemming function
+// const stems = stemWords(tokens);
+// // pass the stems to the remove stop words function
+// const removedStopWords = removeStopwords(stems);
 // log the stems
-console.log(removedStopWords);
+
+// destructure sentiment analyzing and stemming from natural
+const { SentimentAnalyzer, PorterStemmer } = natural;
+// instantiate a new analyzer that includes stemming configurations instead of stemming in a separate function
+const analyzer = new SentimentAnalyzer('English', PorterStemmer, 'afinn');
+// analyze hte input string's sentiment by running get sentiment on your tokens
+const sentimentResults = analyzer.getSentiment(tokens);
+// log the sentiment results
+console.log(sentimentResults);
