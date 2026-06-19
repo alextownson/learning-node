@@ -40,9 +40,23 @@ const tokenizeInput = (inputString) => {
   return tokenizer.tokenize(inputString);
 };
 
+// stemming -> a fast, rule-based text preprocessing technique that reduces inflected or derived words to their root or base form by stripping away suffixes and prefixes
+const stemWords = (tokens) => {
+  const stems = [];
+  // loop through each token
+  for (let token of tokens) {
+    // break each word down to it's stem
+    const stem = natural.PorterStemmer.stem(token);
+    // add the stems to the stems array
+    stems.push(stem);
+  }
+  return stems;
+};
+
 // correct spelling
 const correctedSpelling = correctSpelling(inputString);
 // pass the corrected spelling string to the tokenizer
 const tokens = tokenizeInput(correctedSpelling);
-// log the tokens
-console.log(tokens);
+const stems = stemWords(tokens);
+// log the stems
+console.log(stems);
