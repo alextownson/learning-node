@@ -4,6 +4,7 @@ import dictionary from 'dictionary-en';
 import nspell from 'nspell';
 // import natural language processor
 import natural from 'natural';
+import { removeStopwords } from 'stopword';
 
 // create an nspell instance with the dictionary
 const spell = nspell(dictionary);
@@ -57,6 +58,9 @@ const stemWords = (tokens) => {
 const correctedSpelling = correctSpelling(inputString);
 // pass the corrected spelling string to the tokenizer
 const tokens = tokenizeInput(correctedSpelling);
+// pass the tokens to the stemming function
 const stems = stemWords(tokens);
+// pass the stems to the remove stop words function
+const removedStopWords = removeStopwords(stems);
 // log the stems
-console.log(stems);
+console.log(removedStopWords);
