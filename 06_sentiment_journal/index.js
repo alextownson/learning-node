@@ -2,9 +2,14 @@
 import dictionary from 'dictionary-en';
 // import spell-checker - had to use a different package than textbook
 import nspell from 'nspell';
+// import natural language processor
+import natural from 'natural';
 
 // create an nspell instance with the dictionary
 const spell = nspell(dictionary);
+
+// instantiate a new tokenizer
+const tokenizer = new natural.WordTokenizer();
 
 // test input string
 const inputString = 'I am feling grat!';
@@ -30,4 +35,14 @@ const correctSpelling = (inputString) => {
   return corrections.join(' ');
 };
 
-console.log(correctSpelling(inputString));
+// turn the corrected spelling string into tokens
+const tokenizeInput = (inputString) => {
+  return tokenizer.tokenize(inputString);
+};
+
+// correct spelling
+const correctedSpelling = correctSpelling(inputString);
+// pass the corrected spelling string to the tokenizer
+const tokens = tokenizeInput(correctedSpelling);
+// log the tokens
+console.log(tokens);
