@@ -10,9 +10,6 @@ import prompt from 'prompt';
 // create an nspell instance with the dictionary
 const spell = nspell(dictionary);
 
-// instantiate a new tokenizer
-const tokenizer = new natural.WordTokenizer();
-
 prompt.start({});
 prompt.message = '';
 
@@ -21,10 +18,12 @@ class SentimentJournal {
     // sentiment analysis object
     this.sentiment = new Sentiment();
     // array of sentiment scores
-    this.score = [0];
+    this.scores = [0];
     // this stores the users entry
     this.entry = '';
   }
+
+  // corrects spelling of input string
   correctSpelling = async (inputString) => {
     // create an array of words
     const words = inputString.split(' ');
@@ -73,6 +72,48 @@ class SentimentJournal {
     // return the string
     return corrections.join(' ');
   };
+
+  // creates a new SentimentScore record in the database using the the score parameter
+  async saveScore(score) {
+    await SentimentScore.create({ score });
+  }
+
+  // fetches all persisted scores from the database
+  async fetchEntries() {
+    // limits to 100 most recent scores
+    const results = await SentimentScore.findAll({ limit: 100 });
+    if (results.length) {
+      // if the records exist, only take the score values
+      this.scores = results.map(({ score }) => score);
+    }
+  }
+
+  // analysis method
+  async analyzeSentiment() {
+    // check if the entry exists
+    if (!this.entry || this.entry === '') return;
+    // analyze and get the score
+    const { score } = this.sentiment.analyze(this.entry);
+    // calculate the score between -1 and 1
+    const normalizedScore = Math.min(Math.max(score / 10, -1), 1);
+    // save the score to the database
+    await this.saveScore(normalizedScore);
+    // add the score to the scores array field
+    this.scores.push(normalizedScore);
+  }
+
+  // prompt entry method
+  async promptEntry() {
+    // wait for the user's response to the prompt
+    const { response } = await prompt.get([
+      {
+        name: 'response',
+        description: 'How do you feel?',
+      },
+    ]);
+    // assign the spelling corrected response to this.entry
+    this.entry = await this.correctSpelling(response);
+  }
 }
 
 export default SentimentJournal;
